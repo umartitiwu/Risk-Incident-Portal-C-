@@ -1,0 +1,124 @@
+﻿@model PortalViewModel
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Incident Portal</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="user-welcome">
+                Welcome, @Model.CN
+            </div>
+            <div class="logout-button">
+                <a href="/Account/Logout">Logout</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="incident-form">
+            <form method="post" asp-controller="Account" asp-action="Submit">
+                <div class="form-field">
+                    <label for="surname">Surname</label>
+                    <input type="text" id="surname" name="surname" required>
+                </div>
+                <div class="form-field">
+                    <label for="othernames">Other Names</label>
+                    <input type="text" id="othernames" name="othernames" required>
+                </div>
+                <div class="form-field">
+                    <label for="location">Location:</label>
+                    <select id="location" name="location" required>
+                        <option value="">Select Location</option>
+                        <option value="Abuja">FCT</option>
+                        <option value="Abia">Abia</option>
+                        <option value="Adamawa">Adamawa</option>
+                        <option value="Akwa Ibom">Akwa Ibom</option>
+                        <option value="Anambra">Anambra</option>
+                        <option value="Bauchi">Bauchi</option>
+                        <option value="Bayelsa">Bayelsa</option>
+                        <option value="Benue">Benue</option>
+                        <option value="Borno">Borno</option>
+                        <option value="Cross River">Cross River</option>
+                        <option value="Delta">Delta</option>
+                        <option value="Ebonyi">Ebonyi</option>
+                        <option value="Edo">Edo</option>
+                        <option value="Ekiti">Ekiti</option>
+                        <option value="Enugu">Enugu</option>
+                        <option value="Gombe">Gombe</option>
+                        <option value="Imo">Imo</option>
+                        <option value="Jigawa">Jigawa</option>
+                        <option value="Kaduna">Kaduna</option>
+                        <option value="Kano">Kano</option>
+                        <option value="Katsina">Katsina</option>
+                        <option value="Kebbi">Kebbi</option>
+                        <option value="Kogi">Kogi</option>
+                        <option value="Kwara">Kwara</option>
+                        <option value="Lagos">Lagos</option>
+                        <option value="Nasarawa">Nasarawa</option>
+                        <option value="Niger">Niger</option>
+                        <option value="Ogun">Ogun</option>
+                        <option value="Ondo">Ondo</option>
+                        <option value="Osun">Osun</option>
+                        <option value="Oyo">Oyo</option>
+                        <option value="Plateau">Plateau</option>
+                        <option value="Rivers">Rivers</option>
+                        <option value="Sokoto">Sokoto</option>
+                        <option value="Taraba">Taraba</option>
+                        <option value="Yobe">Yobe</option>
+                        <option value="Zamfara">Zamfara</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label for="department">Department:</label>
+                    <select id="department" name="department" required>
+                        <option value="">Select Department</option>
+                        <option value="Benefit Administration">Benefit Administration</option>
+                        <option value="Business Development">Business Development</option>
+                        <option value="Compliance">Compliance</option>
+                        <option value="Corporate Strategy">Corporate Strategy</option>
+                        <option value="Corporate Communications">Corporate Communications</option>
+                        <option value="Finance">Financial Control</option>
+                        <option value="Human Resources">Human Resources & Admin</option>
+                        <option value="Internal Audit">Internal Audit</option>
+                        <option value="IT">IT</option>
+                        <option value="Investment">Investment</option>
+                        <option value="Legal Department">Legal</option>
+                        <option value="Operations Department">Operations</option>
+                        <option value="Risk Management">Risk</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone" autocomplete="off" required>
+                </div>
+                <div class="form-field">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="@Model.Username" readonly>
+                </div>
+                <div class="form-field">
+                    <label for="dateofincident">Date of Incident:</label>
+                    <input type="date" id="dateofincident" name="dateofIncident" required>
+                </div>
+                <div class="form-field">
+                    <label for="riskdescription">What Is The Risk?</label>
+                    <textarea id="riskdescription" name="riskdescription" rows="4" required></textarea>
+                </div>
+                <div class="form-field">
+                    <label for="action">What Should Be Done To Permanently Eliminate/Minimize The Risk?</label>
+                    <textarea id="action" name="action" rows="4" required></textarea>
+                </div>
+                <div class="form-field">
+                    <label for="control">Any Existing Control Regarding The Risk?</label>
+                    <textarea id="control" name="control" rows="4" required></textarea>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
+

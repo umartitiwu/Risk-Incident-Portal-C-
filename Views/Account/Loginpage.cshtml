@@ -1,0 +1,41 @@
+﻿@using riskportal.Models
+@model LoginViewModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RISK INCIDENT REPORTING PORTAL</title>
+    <link rel="stylesheet" href="\css\stylesheet.css">
+</head>
+<body>
+    <section class="container">
+        <form id="my-form" method="post" asp-controller="Account" asp-action="Login">
+            <div class="signin-text">REPORTING PORTAL</div>
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" autocomplete="off" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" autocomplete="off" required>
+            </div>
+            <button type="submit" id="submit">Login</button>
+
+            @if (ViewData.ModelState.Count > 0)
+            {
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <li>@error.ErrorMessage</li>
+                        }
+                    </ul>
+                </div>
+            }
+        </form>
+    </section>
+</body>
+</html>
+

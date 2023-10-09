@@ -1,0 +1,132 @@
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #130b40;
+  color: #fff;
+  padding: 0.6rem; 
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.logo {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            width: 40px; 
+        }
+
+.logout-button {
+  position: absolute;
+  top: 40px;
+  right: 10px;
+}
+
+.incident-form, .incident-list {
+  max-width: 600px; 
+  margin: 0 auto;
+  padding: 3rem;
+}
+
+form {
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 0.5rem; 
+}
+
+input[type="text"], input[type="tel"], input[type="email"], select, textarea, input[type="date"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  margin-bottom: 1rem; 
+}
+
+button {
+  padding: 8px 16px;
+  background-color: #130b40;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #1a1362;
+}
+
+.bg-dark {
+  background: #130b40;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .incident-form, .incident-list {
+    padding: 1rem;
+  }
+}
+
+.border-top {
+    border-top: 1px solid #ccc;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+    color: #fff;
+    padding: 1rem;
+}
+.user-welcome {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    font-size: 15px; 
+    font-weight: bold; 
+    color: #fff; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 6px 12px; 
+    background-color: #130b40; 
+    border-radius: 5px; 
+}
+
+.welcome-text {
+    color: #777; /* Color for "Welcome" text */
+}
+
+.user-name {
+    color: #007bff; /* Color for the username */
+}
+
+.logout-button a {
+    text-decoration: none;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 5px;
+    background-color: #1a1362;
+    transition: background-color 0.3s ease;
+}
+
+    .logout-button a:hover {
+        background-color: #130b40;
+    }
+
+    .header-content {
+        padding: 5px;
+    }

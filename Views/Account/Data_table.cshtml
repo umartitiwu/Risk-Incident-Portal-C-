@@ -1,0 +1,295 @@
+@using riskportal.Models
+@model List<DataTableViewModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reported Incidents</title>
+    <style>
+        /* Reset default margins and padding */
+        body, h1, h2, h3, h4, h5, h6, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #130B40;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .logo {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            width: 40px;
+        }
+
+        .logout-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .logout-button a {
+            text-decoration: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 5px;
+            background-color: #1a1362;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-button a:hover {
+            background-color: #130b40;
+        }
+
+        /* Table Styles */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .data-table {
+            margin: 20px;
+            width: 100%;
+        }
+
+        .data-table table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .data-table th {
+            background-color: #f2f2f2;
+        }
+
+        .data-table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Responsive Table Styles */
+        @@media (max-width: 768px) {
+            .data-table table {
+                font-size: 14px;
+            }
+
+            .data-table th, .data-table td {
+                padding: 6px;
+            }
+        }
+
+        /* Make table cells truncate text if too long */
+        .truncate-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .export-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #1a1362;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .export-button:hover {
+                background-color: #130b40;
+            }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logout-button">
+            <a href="/Admin/Logout">Logout</a>
+        </div>
+        <h5>REPORTED INCIDENTS</h5>
+    </header>
+    <main>
+        <section class="data-table">
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="width: auto;">No.</th>
+                            <th style="width: auto;">Surname</th>
+                            <th style="width: auto;">Other Names</th>
+                            <th style="width: auto;">Location</th>
+                            <th style="width: auto;">Department</th>
+                            <th style="width: auto;">Phone</th>
+                            <th style="width: auto;">Email</th>
+                            <th style="width: auto;">Date of Incident</th>
+                            <th style="width: auto;">Risk Description</th>
+                            <th style="width: auto;">Action to Minimize Risk</th>
+                            <th style="width: auto;">Existing Control</th>
+                            <th style="width: auto;">Status</th>
+                            <th style="width: auto;">Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="truncate-text">@item.Id</td>
+                                <td class="truncate-text">@item.Surname</td>
+                                <td class="truncate-text">@item.OtherNames</td>
+                                <td class="truncate-text">@item.Location</td>
+                                <td class="truncate-text">@item.Department</td>
+                                <td class="truncate-text">@item.Phone</td>
+                                <td class="truncate-text">@item.Email</td>
+                                <td class="truncate-text">@item.DateOfIncident.ToString("yyyy-MM-dd")</td>
+                                <td class="truncate-text">@item.RiskDescription</td>
+                                <td class="truncate-text">@item.Action</td>
+                                <td class="truncate-text">@item.Control</td>
+                                <td>
+                                    <div class="status-dropdown">
+                                        <select class="status-select" name="status-select" data-id="@item.Id">
+                                            @if (item.Status == "Pending")
+                                            {
+                                                <option value="pending" class="pending" selected>Pending</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="pending" class="pending">Pending</option>
+                                            }
+
+                                            @if (item.Status == "Ongoing")
+                                            {
+                                                <option value="ongoing" class="ongoing" selected>Ongoing</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="ongoing" class="ongoing">Ongoing</option>
+                                            }
+
+                                            @if (item.Status == "Done")
+                                            {
+                                                <option value="done" class="done" selected>Done</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="done" class="done">Done</option>
+                                            }
+
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <textarea class="remarks-text" data-id="@item.Id">@item.Remarks</textarea>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <a href="@Url.Action("ExportToExcel", "Account")" class="export-button">Download</a>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Attach a change event listener to the dropdowns
+            $(".status-select").change(function () {
+                var selectedStatus = $(this).val();
+                var incidentId = $(this).data('id');
+                var selectBox = $(this);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Account/UpdateStatus",
+                    data: { id: incidentId, status: selectedStatus },
+                    success: function (response) {
+                        if (response.success) {
+                            selectBox.css("background-color", GetStatusBackgroundColor(selectedStatus));
+
+                            // Store the selected status in local storage
+                            localStorage.setItem(`status_${incidentId}`, selectedStatus);
+                            alert("Status updated successfully.");
+
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function () {
+                        alert("Error updating status.");
+                    }
+                });
+            });
+
+            // Set initial background colors and restore selected values from local storage
+            $(".status-select").each(function () {
+                var incidentId = $(this).data('id');
+                var storedStatus = localStorage.getItem(`status_${incidentId}`);
+
+                if (storedStatus) {
+                    $(this).val(storedStatus); // Set the selected value
+                    $(this).css("background-color", GetStatusBackgroundColor(storedStatus)); // Set the background color
+                }
+            });
+
+            // Attach a change event listener to the remarks textareas
+            var timer; // Initialize a timer variable
+
+            // Attach an input event listener to the textarea
+            $(".remarks-text").on('input', function () {
+                // Clear the previous timer (if any)
+                clearTimeout(timer);
+
+                // Set a new timer to delay the AJAX request
+                timer = setTimeout(function () {
+                    var incidentId = $(this).data('id');
+                    var remarksText = $(this).val();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Account/UpdateRemarks",
+                        data: { id: incidentId, remarks: remarksText },
+                        success: function (response) {
+                            if (response.success) {
+                                alert("Remarks updated successfully.");
+                            } else {
+                                alert(response.message);
+                            }
+                        },
+                        error: function () {
+                            alert("Error updating remarks.");
+                        }
+                    });
+                }.bind(this), 1000); // Adjust the delay time (in milliseconds) as needed
+            });
+
+            });
+ 
+
+        function GetStatusBackgroundColor(status) {
+            switch (status) {
+                case "pending":
+                    return "red";
+                case "ongoing":
+                    return "yellow";
+                case "done":
+                    return "green";
+            }
+        }
+    </script>
+</body>
+</html>
